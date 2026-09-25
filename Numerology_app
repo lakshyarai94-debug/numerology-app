@@ -1,0 +1,27 @@
+import streamlit as st
+
+def numerology_number(dob):
+    digits = [int(char) for char in str(dob) if char.isdigit()]
+    total = sum(digits)
+    
+    while total > 9:
+        total = sum(int(digit) for digit in str(total))
+    
+    return total
+
+
+st.set_page_config(page_title="Numerology Calculator", page_icon="🔮")
+
+st.title("🔮 Numerology Calculator")
+st.write("आफ्नो Date of Birth हालेर Numerology Number पत्ता लगाउनुहोस्")
+
+dob = st.text_input("Date of Birth लेख्नुहोस् (जस्तै: 1991-02-28)", 
+                    placeholder="YYYY-MM-DD")
+
+if st.button("Calculate Numerology"):
+    if dob:
+        result = numerology_number(dob)
+        st.success(f"तपाईंको Numerology Number: **{result}**")
+        st.balloons()
+    else:
+        st.warning("कृपया Date of Birth लेख्नुहोस्!")
